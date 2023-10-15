@@ -22,29 +22,38 @@ public:
 //TODO
 template <class T>
 bool StackExt<T>::empty() const {
-    return true;
+    return values.empty() && minimums.empty();
 }
 
 //TODO
 template <class T>
 T& StackExt<T>::top() {
-    T* x = new T();
-    return *x;
+    if (values.empty()) throw std::runtime_error("Stack is empty");;
+    return values.top();
 }
 
 //TODO
 template <class T>
 void StackExt<T>::pop() {
+    if (values.empty()) return;
+    if (values.top() == minimums.top()) {
+        minimums.pop();
+        values.pop();
+        return;
+    }
+    values.pop();
 }
 
 //TODO
 template <class T>
 void StackExt<T>::push(const T& val) {
+    values.push(val);
+    if (val <= minimums.top()) minimums.push(val);
 }
 
 //TODO
 template <class T>
 T& StackExt<T>::findMin() {
-    T* x = new T();
-    return *x;
+    if (minimums.empty()) throw std::runtime_error("Stack is empty");;
+    return minimums.top();
 }

@@ -10,9 +10,17 @@ FunListStackQueueProblem::FunListStackQueueProblem() {}
 // TODO
 list<int> FunListStackQueueProblem::removeHigher(list<int> &values, int x) {
     list<int> l1;
+    auto it = values.begin();
+    while (it != values.end()) {
+        if (*it > x) {
+            l1.push_back(*it);
+            it = values.erase(it);
+            continue;
+        }
+        it++;
+    }
     return l1;
 }
-
 
 //=============================================================================
 // Exercise 2: Overlapping Intervals
@@ -20,6 +28,22 @@ list<int> FunListStackQueueProblem::removeHigher(list<int> &values, int x) {
 //TODO
 list<pair<int,int>> FunListStackQueueProblem::overlappingIntervals(list<pair<int,int>> values) {
     list<pair<int,int>> res;
+    values.sort();
+    auto it = values.begin();
+    int start = it->first;
+    int end = it->second;
+    it++;
+    while (it != values.end()) {
+        if (it->first <= end) {
+            end = it->second;
+        } else {
+            res.emplace_back(start, end);
+            start = it->first;
+            end = it->second;
+        }
+        it++;
+    }
+    res.emplace_back(start, end);
     return res;
 }
 

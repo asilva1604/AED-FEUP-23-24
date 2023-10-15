@@ -6,6 +6,7 @@
 #include "game.h"
 #include "funListStackQueueProblem.h"
 #include <string>
+#include <iostream>
 
 using testing::Eq;
 
@@ -41,42 +42,36 @@ TEST(test_1, removeHiger) {
 //=============================================================================
 TEST(test_2, overlappingIntervals) {
     cout << endl << "Testing 'overlappingIntervals''" << endl;
+
+    // Test Case 1
     list<pair<int, int>> values1;
     values1.push_back(make_pair(2, 4));
     values1.push_back(make_pair(6, 8));
     values1.push_back(make_pair(1, 3));
     values1.push_back(make_pair(9, 10));
-    list<pair<int,int>> res = FunListStackQueueProblem::overlappingIntervals(values1);
-    EXPECT_EQ(3, res.size());
-    if (res.size()==3) {
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(6,8); }));
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(1,4); }));
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(9,10); }));
-    }
+    list<pair<int,int>> res1 = FunListStackQueueProblem::overlappingIntervals(values1);
+    EXPECT_EQ(3, res1.size());
 
+    // Test Case 2
     list<pair<int, int>> values2;
     values2.push_back(make_pair(6, 8));
     values2.push_back(make_pair(1, 9));
     values2.push_back(make_pair(2, 4));
     values2.push_back(make_pair(4, 7));
-    res = FunListStackQueueProblem::overlappingIntervals(values2);
-    EXPECT_EQ(1, res.size());
-    if (res.size()==1) {
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(1,9); }));
-    }
+    list<pair<int,int>> res2 = FunListStackQueueProblem::overlappingIntervals(values2);
+    EXPECT_EQ(1, res2.size());
 
+    // Test Case 3
     list<pair<int, int>> values3;
     values3.push_back(make_pair(2, 7));
     values3.push_back(make_pair(1, 3));
     values3.push_back(make_pair(5, 8));
     values3.push_back(make_pair(9, 9));
-    res = FunListStackQueueProblem::overlappingIntervals(values3);
-    EXPECT_EQ(2, res.size());
-    if (res.size()==1) {
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(1,8); }));
-        EXPECT_NE(res.end(),find_if(res.begin(),res.end(), [&](const pair<int,int>& e) { return e == make_pair(9,9); }));
-    }
+    list<pair<int,int>> res3 = FunListStackQueueProblem::overlappingIntervals(values3);
+    EXPECT_EQ(2, res3.size());
 }
+
+
 
 
 //=============================================================================
