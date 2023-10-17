@@ -54,6 +54,18 @@ list<pair<int,int>> FunListStackQueueProblem::overlappingIntervals(list<pair<int
 // TODO
 vector<string> FunListStackQueueProblem::binaryNumbers(int n) {
     vector<string> res;
+    queue<string> q;
+    q.emplace("1");\
+
+    while (n--) {
+        string curr = q.front();
+        q.pop();
+
+        res.push_back(curr);
+
+        q.push(curr + "0");
+        q.push(curr + "1");
+    }
     return res;
 }
 
